@@ -18,4 +18,4 @@ Recommended citation:
 
 Ibadulla, R.; Chen, T.M.; Reyes-Aldasoro, C.C. FatNet: High-Resolution Kernels for Classification Using Fully Convolutional Optical Neural Networks. AI 2023, 4, 361-374. https://doi.org/10.3390/ai4020018.
 
-[BibTeX](/files/ai-v04-i02_20230416.bib)
+[BibTeX](/files/publications/fatnet/ai-v04-i02_20230416.bib)
