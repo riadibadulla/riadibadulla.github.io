@@ -1,7 +1,7 @@
 ---
 title: "FatNet: High-Resolution Kernels for Classification Using Fully Convolutional Optical Neural Networks"
 collection: publications
-permalink: /publication/2009-10-01-paper-title-number-1
+permalink: /publication/fatnet
 excerpt: 'This paper describes the transformation of a traditional in silico classification network into an optical fully convolutional neural network with high-resolution feature maps and kernels.'
 date: 2023-04-03
 venue: 'AI journal - MDPI '
