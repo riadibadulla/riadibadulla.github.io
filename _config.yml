@@ -85,7 +85,7 @@ author:
   bio              : "Research scientist at City University of London, specialised in Deep Learning, Computer Science"
   location         : "London, UK"
   employer         :
-  pubmed           : ""
+  pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=KHdEW9oAAAAJ&hl=en"
   email            :  "riad.ibadulla@city.ac.uk"
   researchgate     : "https://www.researchgate.net/profile/Riad_Ibadulla2"
@@ -99,10 +99,10 @@ author:
   github           : "riadibadulla"
   google_plus      :
   keybase          :
-  instagram        : "https://www.instagram.com/riadibadulla/"
+  instagram        : "riadibadulla"
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "https://www.linkedin.com/in/riadibadulla/"
+  linkedin         : "riadibadulla"
   orcid            : "http://orcid.org/0000-0002-0359-0830"
   pinterest        :
   soundcloud       :
