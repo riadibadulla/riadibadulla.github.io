@@ -639,7 +639,9 @@ code {
 .pub-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 0.5rem;
 }
 
 .pub-tile {
@@ -702,6 +704,7 @@ code {
 }
 
 .figure img {
+  background: #ffffff;
   border-radius: var(--radius);
   border: 1px solid var(--rule);
 }
@@ -865,6 +868,14 @@ code {
 
 .package h2 {
   margin-top: 0;
+}
+
+.package-meta {
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
 }
 
 .package dl {

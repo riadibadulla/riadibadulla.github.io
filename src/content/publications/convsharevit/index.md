@@ -9,7 +9,9 @@ doi: '10.1109/TNNLS.2026.3689450'
 open_access: 'https://arxiv.org/abs/2504.11517'
 open_access_label: 'Preprint (arXiv)'
 # TODO: check the summary figures (3.04x) against the published TNNLS version
-# TODO: add a figure (e.g. the architecture diagram from the paper)
+figure: './figure.webp'
+figure_alt: 'Side-by-side schematic of a standard Vision Transformer (top) and ConvShareViT (bottom), both taking an image of a university building split into nine patches. In the ViT, patches pass through linear layers into multi-head self-attention and MLP blocks. In ConvShareViT, patches pass through transposed convolutions into convolutional multi-head self-attention and an MLP with shared depthwise convolutions, ending in a convolutional classifier.'
+figure_caption: 'A standard Vision Transformer (top) compared with ConvShareViT (bottom). Linear projections become transposed convolutions, and the attention and MLP blocks use shared depthwise convolutions, so the whole model can run as convolutions on a 4f optical system.'
 ---
 
 *Abstract of the arXiv preprint. The published version may differ slightly.*

@@ -10,7 +10,9 @@ open_access: 'https://openaccess.city.ac.uk/id/eprint/35357/'
 body_heading: 'Overview'
 open_access_label: 'Accepted manuscript (City Research Online)'
 code: 'https://github.com/riadibadulla/PROTECTION'
-# TODO: add a figure (e.g. the system diagram from the paper)
+figure: './figure.webp'
+figure_alt: 'Flow diagram of PROTECTION. A training set trains Model 1; perturbed samples are predicted and checked by an SMT solver for a target formula. High-confidence outputs are accepted. Low-confidence samples, and in the PROTECTION-wf variant also counter-examples, are used to train Model 2, and the process repeats until no samples are left.'
+figure_caption: 'The PROTECTION pipeline. Inputs whose outputs cannot be verified as robust are delegated to a further model, repeating until no samples are left. PROTECTION-wof passes on low-confidence samples only; PROTECTION-wf also passes on SMT counter-examples.'
 ---
 
 The security of Internet of Things (IoT) ecosystems is crucial for maintaining user trust and adoption. Intrusion detection and prevention systems based on machine learning are widely used to protect IoT networks, but they are vulnerable to adversarial attacks and their robustness cannot be formally verified.

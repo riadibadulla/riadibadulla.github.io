@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Todo from '../components/Todo.astro';
 import { CRITERIA } from '../criteria';
 import { CONTACT } from '../site';
 ---
@@ -17,7 +16,11 @@ import { CONTACT } from '../site';
         Three review packages for smaller AI companies and regulated organisations. Each one ends with a written
         report that explains what I found, how serious it is, and what to do about it.
       </p>
-      <p><Todo>typical duration of each package and what the client needs to provide</Todo></p>
+      <p>
+        Durations below are typical elapsed times. The actual time, and so the price, depends on the size of the
+        system, how deep you want the review to go, and how much access you can give to code, models and
+        documentation.
+      </p>
     </header>
 
     <div class="prose">
@@ -34,7 +37,7 @@ import { CONTACT } from '../site';
           <li>Inference cost: latency, memory, throughput and hardware fit</li>
           <li>Options for reducing cost, such as architectural changes, pruning, quantisation or distillation</li>
         </ul>
-        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+        <p class="package-meta"><strong>Typical duration:</strong> 2 to 4 weeks<br /><strong>Price:</strong> quoted per engagement. <a href="/contact/">Get in touch</a> for a quote.</p>
       </section>
 
       <section class="package" aria-labelledby="robustness">
@@ -49,7 +52,7 @@ import { CONTACT } from '../site';
           <li>Where the model is small enough, formal verification of robustness properties</li>
           <li>Recommended defences and monitoring, ranked by effort and benefit</li>
         </ul>
-        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+        <p class="package-meta"><strong>Typical duration:</strong> 3 to 6 weeks<br /><strong>Price:</strong> quoted per engagement. <a href="/contact/">Get in touch</a> for a quote.</p>
       </section>
 
       <section class="package" aria-labelledby="privacy">
@@ -64,7 +67,7 @@ import { CONTACT } from '../site';
           <li>Use of third-party model APIs and what data leaves your control</li>
           <li>Practical privacy-preserving options, such as anonymisation, local inference or federated approaches</li>
         </ul>
-        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+        <p class="package-meta"><strong>Typical duration:</strong> 2 to 4 weeks<br /><strong>Price:</strong> quoted per engagement. <a href="/contact/">Get in touch</a> for a quote.</p>
       </section>
 
       <section class="package" aria-labelledby="iso42001">
@@ -77,7 +80,7 @@ import { CONTACT } from '../site';
           <strong>This is preparation, not certification.</strong> Certification can only be issued by an accredited
           certification body.
         </p>
-        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+        <p class="package-meta"><strong>Typical duration:</strong> 2 to 5 weeks<br /><strong>Price:</strong> quoted per engagement. <a href="/contact/">Get in touch</a> for a quote.</p>
       </section>
 
       <section class="package" aria-labelledby="how">
