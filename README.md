@@ -1,31 +1,83 @@
-A Github Pages template for academic websites. This was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License. See LICENSE.md.
+# riadibadulla.com
 
-I think I've got things running smoothly and fixed some major bugs, but feel free to file issues or make pull requests if you want to improve the generic template / theme.
+Source for [riadibadulla.com](https://riadibadulla.com), the site of Dr Riad Ibadulla. Built with [Astro](https://astro.build) as a fully static site and hosted on Cloudflare Pages.
 
-### Note: if you are using this repo and now get a notification about a security vulnerability, delete the Gemfile.lock file. 
+## Run it locally
 
-# Instructions
+You need Node.js 22.12 or later (`node -v` to check).
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+```bash
+npm install        # first time only
+npm run dev        # live-reloading site at http://localhost:4321
+```
 
-See more info at https://academicpages.github.io/
+Before pushing, check that the production build works:
 
-## To run locally (not on GitHub Pages, to serve on your own computer)
+```bash
+npm run build      # builds the site into dist/ and stops on any content error
+npm run preview    # serves dist/ at http://localhost:4321
+npm run check      # optional: type-checks the code
+```
 
-1. Clone the repository and made updates as detailed above
-1. Make sure you have ruby-dev, bundler, and nodejs installed: `sudo apt install ruby-dev ruby-bundler nodejs`
-1. Run `bundle clean` to clean up the directory (no need to run `--force`)
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `bundle exec jekyll liveserve` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+## Where things live
 
-# Changelog -- bugfixes and enhancements
+| What | Where |
+| --- | --- |
+| Name, emails, social links, nav | `src/site.ts` |
+| The seven review criteria | `src/criteria.ts` |
+| Technical Notes | `src/content/notes/` |
+| Publications | `src/content/publications/<slug>/index.md` |
+| Pages (home, services, about, contact) | `src/pages/` |
+| Styles (one file, light and dark mode) | `src/styles/global.css` |
+| Profile photo | `src/assets/profile.jpg` |
+| PDFs, CV, favicon, social image | `public/` (served as is) |
+| Redirects from old URLs | `public/_redirects` |
 
-There is one logistical issue with a ready-to-fork template theme like academic pages that makes it a little tricky to get bug fixes and updates to the core theme. If you fork this repository, customize it, then pull again, you'll probably get merge conflicts. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch. 
+Anything marked `TODO` on the site (yellow label) or in a file still needs content. Find them all with `grep -rni todo src`.
 
-To support this, all changes to the underlying code appear as a closed issue with the tag 'code change' -- get the list [here](https://github.com/academicpages/academicpages.github.io/issues?q=is%3Aclosed%20is%3Aissue%20label%3A%22code%20change%22%20). Each issue thread includes a comment linking to the single commit or a diff across multiple commits, so those with forked repositories can easily identify what they need to patch.
+## Add a new Technical Note
+
+1. Copy the template:
+   ```bash
+   cp src/content/notes/_example-note.md src/content/notes/acme-vision-2026.md
+   ```
+   The file name becomes the address: `/notes/acme-vision-2026/`. Use lower case and hyphens. Do not start it with `_`, because files starting with `_` are never published.
+2. Open the new file and replace every `PLACEHOLDER` value in the frontmatter (the block between the `---` lines):
+   - `title`, `company`, `date` (`YYYY-MM-DD`), `summary` (one or two sentences, also used in search results and RSS).
+   - `reviewed_artefacts`: one list item per artefact reviewed (repositories with commit, papers, model cards and so on).
+   - `weighting`: how the criteria were weighted for this company and why. It is shown above the score table.
+   - `scores`: all seven criteria must be present. Each has a `score` from 0 to 10 (decimals are fine) or the exact text `'not assessable'`, and a one-line `justification`.
+   - `overall_score`: 0 to 10.
+   - `recommended_engagement`: for example `'Adversarial robustness audit'`.
+   - `pdf` (optional): put the PDF in `public/files/notes/` and set `pdf: '/files/notes/acme-vision-2026.pdf'`. Delete the line if there is no PDF.
+3. Replace the placeholder body text under the frontmatter with the note itself, in Markdown.
+4. Run `npm run dev` and open `http://localhost:4321/notes/` to check it. If a field is missing or wrong, the terminal names the file and the field.
+5. Run `npm run build`, then commit and push. The note appears on the home page, the notes index and the RSS feed (`/notes/rss.xml`) automatically.
+
+## Add a publication
+
+1. Create a folder named after the paper, for example `src/content/publications/my-paper/`, containing an `index.md`. Copying an existing one (such as `fatnet/index.md`) is the easiest start.
+2. Fill in the frontmatter:
+   - Required: `title`, `authors` (list, your name is bolded automatically), `venue`, `date`, `type` (`journal`, `conference` or `workshop`), `summary` (two or three plain-English sentences), `doi` (without `https://doi.org/`).
+   - Optional links: `open_access` with `open_access_label` (for example an arXiv or City Research Online page), `code` (GitHub URL), `bibtex`, `pdf`.
+   - Optional figure: put an image (`.jpg`, `.png` or `.webp`) in the same folder, then set `figure: './figure.jpg'`, plus `figure_alt` (describe what the image shows) and `figure_caption`. It is resized automatically.
+   - Optional `short_title`: shown on the thumbnail when there is no figure. Defaults to the part of the title before a colon.
+   - Optional `body_heading`: heading above the body text. Defaults to `Abstract`.
+3. Put the abstract in the body under the frontmatter.
+4. To host a PDF or BibTeX file, put it in `public/files/publications/my-paper/` and set `pdf: '/files/publications/my-paper/paper.pdf'` (or `bibtex:`). Check the publisher allows you to host the PDF first.
+5. `npm run build`, commit, push. Papers are listed newest first by `date`.
+
+## Update the CV
+
+Replace `public/files/Riad_Ibadulla_CV.pdf` with the new file, keeping the same name. Remove the phone number first, because the file is public.
+
+## How deployment works
+
+The site is hosted on Cloudflare Pages, connected to this GitHub repository.
+
+- Every push to `master` triggers a build on Cloudflare (`npm run build`), and the contents of `dist/` go live at https://riadibadulla.com within a minute or two.
+- Pushes to other branches build a preview at a separate `*.pages.dev` address, without touching the live site.
+- If a build fails (for example a note with a missing field), the live site stays on the previous version. The error is in the Cloudflare dashboard under the project's Deployments tab.
+- There is no server and no database. Everything is static HTML, CSS, images and PDFs.
+
+Build settings, for reference: build command `npm run build`, output directory `dist`, Node version from `.nvmrc` (22).
