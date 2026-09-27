@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import profile from '../assets/profile.jpg';
+import { CONTACT, CV_PATH } from '../site';
+
+const repos = [
+  {
+    name: 'simulator',
+    href: 'https://github.com/riadibadulla/simulator',
+    text: 'A PyTorch simulator of free-space optical convolutional neural networks, using the angular spectrum method to model light propagation through a 4f system.',
+  },
+  {
+    name: 'FatSpitter',
+    href: 'https://github.com/riadibadulla/FatSpitter',
+    text: 'Takes a PyTorch sequential model and converts it into a FatNet.',
+  },
+  {
+    name: 'FatUnet',
+    href: 'https://github.com/riadibadulla/FatUnet',
+    text: 'Fat-U-Net segmentation of the Oxford-IIIT Pet dataset and HeLa cell nuclei.',
+  },
+  {
+    name: 'PROTECTION',
+    href: 'https://github.com/riadibadulla/PROTECTION',
+    text: 'Code for the provably robust IoT intrusion detection system.',
+  },
+  {
+    name: 'SmartRedBox',
+    href: 'https://github.com/riadibadulla/SmartRedBox',
+    text: 'The prototype built during the 2023 Generative AI Hackathon.',
+  },
+  {
+    name: 'Anonymise_LLM',
+    href: 'https://github.com/riadibadulla/Anonymise_LLM',
+    text: 'A browser extension that uses local language models, via Ollama, to find sensitive information in text typed into chat assistants and replace it with generated substitutes.',
+  },
+  {
+    name: 'DDK',
+    href: 'https://github.com/riadibadulla/DDK',
+    text: 'A GPT-style decoder-only transformer built from scratch in PyTorch: attention, positional embeddings, training loop, checkpointing and text generation.',
+  },
+];
+---
+
+<Base
+  title="About"
+  description="Dr Riad Ibadulla is a Lecturer in Computer Science at City St George’s, University of London, working on efficient deep learning, adversarial robustness and computer vision."
+>
+  <div class="wrap page">
+    <div class="about-intro">
+      <header class="prose">
+        <p class="eyebrow">About</p>
+        <h1>Dr Riad Ibadulla</h1>
+        <p class="lede">
+          I am a Lecturer in Computer Science at City St George’s, University of London, where I teach deep learning,
+          computer vision and programming, and research medical image analysis.
+        </p>
+        <p>
+          My PhD, at City, University of London, was on deep learning architectures for free-space optical AI
+          accelerators. It produced FatNet, a method for adapting conventional networks to optical hardware by trading
+          channel depth for spatial resolution, and led to Fat-U-Net for segmentation and ConvShareViT, a Vision
+          Transformer that runs using only convolutions. After the PhD I worked on neural networks for intrusion
+          detection that combine deep learning with formal methods, which led to PROTECTION.
+        </p>
+        <p>
+          Before the PhD I was a Deep Learning Engineer at Optalysys, which develops optical co-processors for AI. I
+          designed and benchmarked models for high-throughput inference against GPU baselines, and contributed to a
+          demonstration project with the UK National Cyber Security Centre on video-based extremism detection.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href={CV_PATH}>Download CV (PDF)</a>
+          <a class="btn btn-secondary" href="/contact/">Contact</a>
+        </div>
+      </header>
+      <Image
+        class="portrait"
+        src={profile}
+        alt="Riad Ibadulla in a dark suit and blue tie, arms folded, standing beside a white column."
+        widths={[240, 480]}
+        sizes="15rem"
+      />
+    </div>
+
+    <section class="section prose" aria-labelledby="teaching">
+      <h2 id="teaching">Teaching</h2>
+      <p>At City St George’s, University of London, since January 2025:</p>
+      <ul>
+        <li><strong>Deep Learning for Image Analysis</strong> (MSc), module leader</li>
+        <li><strong>Python Programming</strong> (Foundation year), module leader</li>
+        <li><strong>Computer Vision</strong> (MSc)</li>
+        <li><strong>C++</strong> (second year)</li>
+        <li><strong>Java</strong> (first year)</li>
+        <li>Supervision of MSc projects in deep learning and BSc final-year dissertations</li>
+        <li>Assessment design, lectures and lab support for other machine learning and software engineering modules</li>
+      </ul>
+      <p>
+        From 2021 to 2024 I was a Teaching Assistant on undergraduate and postgraduate modules in Python, C++, Big Data
+        (GCP and PySpark) and Computer Vision.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="experience">
+      <h2 id="experience" class="prose">Experience</h2>
+      <ol class="timeline prose">
+        <li>
+          <span class="when">2025 to present</span>
+          <div>
+            <h3>Lecturer in Computer Science</h3>
+            <span class="muted">City St George’s, University of London</span>
+            <p>Teaching and supervision as above. Research on medical imaging: segmentation, alignment and landmark location in knee images.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2024 to 2025</span>
+          <div>
+            <h3>Postdoctoral Researcher (part-time)</h3>
+            <span class="muted">City, University of London</span>
+            <p>Robust neural networks for intrusion detection, combining deep learning with SMT-based formal methods. Built evaluation tooling for controlled experiments, ablations and robustness under perturbation.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2021 to 2024</span>
+          <div>
+            <h3>Teaching Assistant</h3>
+            <span class="muted">City, University of London</span>
+          </div>
+        </li>
+        <li>
+          <span class="when">2019 to 2020</span>
+          <div>
+            <h3>Deep Learning Engineer</h3>
+            <span class="muted">Optalysys</span>
+            <p>Models for optical AI acceleration, benchmarked against GPU baselines under strict compute, memory and latency limits.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2019</span>
+          <div>
+            <h3>Python Developer (internship)</h3>
+            <span class="muted">Formation MSK Ltd</span>
+            <p>Data analysis and decision-tree logic for a KPI analytics tool used with telecom retail clients.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="education">
+      <h2 id="education" class="prose">Education</h2>
+      <ol class="timeline prose">
+        <li>
+          <span class="when">2020 to 2024</span>
+          <div>
+            <h3>PhD in Computer Science</h3>
+            <span class="muted">City, University of London</span>
+            <p>Thesis: <a href="https://openaccess.city.ac.uk/id/eprint/34330/">High Resolution Capabilities of Free-space Optical Neural Networks</a>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2018 to 2019</span>
+          <div>
+            <h3>MSc in Artificial Intelligence, Merit</h3>
+            <span class="muted">University of St Andrews</span>
+            <p>Thesis: Simplex Optimisation for Aerial Image Stitching (<a href="https://github.com/riadibadulla/ImageMosaicing">code</a>).</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2015 to 2018</span>
+          <div>
+            <h3>BEng in Computer Systems Engineering, First Class</h3>
+            <span class="muted">City, University of London</span>
+            <p>Thesis: Estimating Hyperparameters of Long Short-Term Memory in Speech Recognition Systems.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section prose" aria-labelledby="recognition">
+      <h2 id="recognition">Recognition</h2>
+      <h3>First place, Generative AI Hackathon, 10 Downing Street Data Science team (July 2023)</h3>
+      <p>
+        With Team Redux, a team of civil servants and myself, I built a prototype that used a large language model to
+        modernise the ministerial red box. We presented it to Minister Alex Burghart at 10 Downing Street, and I was
+        invited to the meeting that set up the follow-on project. The government’s Incubator for AI went on to develop
+        the concept into <a href="https://ai.gov.uk/knowledge-hub/tools/redbox/">Redbox</a>, which was used by more
+        than 6,000 civil servants.
+        <a href="https://www.citystgeorges.ac.uk/news-and-events/news/2023/09/riad-ibadullah-excels-as-part-of-victorious-team-redux-in-three-day-generative-ai-hackathon">City St George’s news coverage</a>.
+      </p>
+      <h3>State scholarship, “Education of Azerbaijani Youth Abroad” (2014)</h3>
+      <p>A fully funded government scholarship for study abroad, awarded on academic merit.</p>
+    </section>
+
+    <section class="section prose" aria-labelledby="code">
+      <h2 id="code">Open-source code</h2>
+      <ul class="entry-list">
+        {
+          repos.map((r) => (
+            <li>
+              <h3 class="entry-title"><a href={r.href}>{r.name}</a></h3>
+              <p>{r.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="section prose" aria-labelledby="languages">
+      <h2 id="languages">Languages</h2>
+      <p>English (fluent), Azerbaijani (native), Russian (native), Turkish (fluent).</p>
+      <p class="small muted">
+        University email for academic enquiries: <a href={`mailto:${CONTACT.universityEmail}`}>{CONTACT.universityEmail}</a>
+      </p>
+    </section>
+  </div>
+</Base>

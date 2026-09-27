@@ -1,0 +1,115 @@
+---
+import { getNotes } from '../notes';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import NoteList from '../components/NoteList.astro';
+import profile from '../assets/profile.jpg';
+import { SITE, CONTACT, PROFILES } from '../site';
+
+const notes = (await getNotes()).slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Riad Ibadulla',
+  honorificPrefix: 'Dr',
+  url: SITE.url,
+  email: `mailto:${CONTACT.email}`,
+  jobTitle: 'Lecturer in Computer Science',
+  worksFor: { '@type': 'CollegeOrUniversity', name: 'City St George’s, University of London' },
+  alumniOf: ['City, University of London', 'University of St Andrews'],
+  sameAs: PROFILES.map((p) => p.href),
+};
+---
+
+<Base jsonLd={jsonLd}>
+  <div class="wrap">
+    <section class="hero" aria-labelledby="intro">
+      <div>
+        <p class="eyebrow">AI technical review and advisory</p>
+        <h1 id="intro">Independent technical review of AI systems, from a working researcher.</h1>
+        <p class="lede">
+          I am Dr Riad Ibadulla, a Lecturer in Computer Science at City St George’s, University of London, with a PhD
+          in deep learning architectures for optical AI accelerators and industry experience as a Deep Learning
+          Engineer at Optalysys. I review and advise on the technical work of smaller AI companies and regulated
+          organisations: how models are built, how they fail under pressure, and how they handle data.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/contact/">Get in touch</a>
+          <a class="btn btn-secondary" href="/services/">See services</a>
+        </div>
+      </div>
+      <Image
+        class="portrait"
+        src={profile}
+        alt="Riad Ibadulla in a dark suit and blue tie, arms folded, standing beside a white column."
+        widths={[320, 480, 704]}
+        sizes="(min-width: 52rem) 22rem, 14rem"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </section>
+
+    <section class="section" aria-labelledby="specialisms">
+      <h2 id="specialisms">Specialisms</h2>
+      <div class="grid-2">
+        <div class="specialism">
+          <h3>Efficient deep learning architectures</h3>
+          <p>
+            Designing and adapting neural networks to run within tight limits on compute, memory and latency. My
+            doctoral research produced FatNet, Fat-U-Net and ConvShareViT, architectures for free-space optical AI
+            accelerators, the latest published in <em>IEEE Transactions on Neural Networks and Learning Systems</em>.
+          </p>
+          <p><a href="/publications/">Publications</a></p>
+        </div>
+        <div class="specialism">
+          <h3>Adversarial robustness with formal methods</h3>
+          <p>
+            Testing, and where possible proving, how models behave when their inputs are deliberately manipulated.
+            PROTECTION, presented at a SAFECOMP 2025 workshop, uses SMT-based verification to give formal robustness
+            guarantees for a machine-learning intrusion detection system.
+          </p>
+          <p><a href="/publications/protection/">Read about PROTECTION</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="latest-notes">
+      <div class="section-head">
+        <h2 id="latest-notes">Latest Technical Notes</h2>
+        <a href="/notes/">All notes</a>
+      </div>
+      <p class="prose muted">
+        Published technical reviews of companies’ public AI work, scored against seven criteria.
+      </p>
+      <NoteList notes={notes} headingLevel="h3" />
+    </section>
+
+    <section class="section" aria-labelledby="recognition">
+      <div class="callout prose">
+        <h2 id="recognition">From hackathon to government tool</h2>
+        <p>
+          In July 2023 my team won the Generative AI Hackathon run by the 10 Downing Street Data Science team through
+          Evidence House, with a prototype that used a large language model to modernise the ministerial red box. We
+          presented it to Minister Alex Burghart at 10 Downing Street, and I was invited to the meeting that set up the
+          follow-on project. The concept was then developed by the government’s Incubator for AI into
+          <a href="https://ai.gov.uk/knowledge-hub/tools/redbox/">Redbox</a>, which was used by more than 6,000
+          civil servants.
+        </p>
+        <p class="small muted">
+          Sources: <a href="https://www.citystgeorges.ac.uk/news-and-events/news/2023/09/riad-ibadullah-excels-as-part-of-victorious-team-redux-in-three-day-generative-ai-hackathon">City St George’s news</a>,
+          <a href="https://ai.gov.uk/blogs/going-10x-using-hackathons-to-kickstart-government-ai-development-and-adoption/">Incubator for AI</a>,
+          <a href="https://ai.gov.uk/blogs/redbox-reflections-5-key-lessons-from-building-and-sunsetting-our-government-ai-chatbot/">Redbox reflections</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="contact">
+      <h2 id="contact">Discuss a review</h2>
+      <p class="prose">
+        The quickest way to reach me is by email at <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>. A short
+        description of your system and what you would like looked at is enough to start.
+      </p>
+    </section>
+  </div>
+</Base>

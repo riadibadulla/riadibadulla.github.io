@@ -1,0 +1,13 @@
+# Old Jekyll (academicpages) URLs to their new homes
+/publication/fatnet          /publications/fatnet/          301
+/publication/fatnet/         /publications/fatnet/          301
+/publication/fatunet         /publications/fat-u-net/       301
+/publication/fatunet/        /publications/fat-u-net/       301
+/cv                          /about/                        301
+/cv/                         /about/                        301
+/resume                      /about/                        301
+/teaching/                   /about/#teaching               301
+/talks/                      /                              301
+/portfolio/                  /                              301
+/year-archive/               /notes/                        301
+/about.html                  /about/                        301

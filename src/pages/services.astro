@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Todo from '../components/Todo.astro';
+import { CRITERIA } from '../criteria';
+import { CONTACT } from '../site';
+---
+
+<Base
+  title="Services"
+  description="Technical review and advisory packages for AI startups and regulated organisations: architecture and efficiency review, adversarial robustness audit, privacy posture assessment, and ISO/IEC 42001 readiness."
+>
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow">Services</p>
+      <h1>Services</h1>
+      <p class="lede">
+        Three review packages for smaller AI companies and regulated organisations. Each one ends with a written
+        report that explains what I found, how serious it is, and what to do about it.
+      </p>
+      <p><Todo>typical duration of each package and what the client needs to provide</Todo></p>
+    </header>
+
+    <div class="prose">
+      <section class="package" aria-labelledby="architecture">
+        <h2 id="architecture">Architecture and efficiency review</h2>
+        <p>
+          For teams whose models need to be faster, smaller or cheaper to run, or who want an outside view before
+          committing to an architecture.
+        </p>
+        <h3>Scope</h3>
+        <ul>
+          <li>Model architecture and the reasoning behind the main design choices</li>
+          <li>Training and evaluation pipeline, including how results are measured and reproduced</li>
+          <li>Inference cost: latency, memory, throughput and hardware fit</li>
+          <li>Options for reducing cost, such as architectural changes, pruning, quantisation or distillation</li>
+        </ul>
+        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+      </section>
+
+      <section class="package" aria-labelledby="robustness">
+        <h2 id="robustness">Adversarial robustness audit</h2>
+        <p>
+          For systems where a wrong answer is costly, or where someone may try to make the model fail on purpose.
+        </p>
+        <h3>Scope</h3>
+        <ul>
+          <li>Threat model: who might attack the system, how, and what they would gain</li>
+          <li>Testing against adversarial examples and input perturbations relevant to your data</li>
+          <li>Where the model is small enough, formal verification of robustness properties</li>
+          <li>Recommended defences and monitoring, ranked by effort and benefit</li>
+        </ul>
+        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+      </section>
+
+      <section class="package" aria-labelledby="privacy">
+        <h2 id="privacy">Privacy posture assessment</h2>
+        <p>
+          For teams that train on or process personal or sensitive data and need to know where the risks are.
+        </p>
+        <h3>Scope</h3>
+        <ul>
+          <li>How data is collected, stored, used for training and retained</li>
+          <li>Risks of models memorising or leaking training data</li>
+          <li>Use of third-party model APIs and what data leaves your control</li>
+          <li>Practical privacy-preserving options, such as anonymisation, local inference or federated approaches</li>
+        </ul>
+        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+      </section>
+
+      <section class="package" aria-labelledby="iso42001">
+        <h2 id="iso42001">ISO/IEC 42001 readiness</h2>
+        <p>
+          ISO/IEC 42001 is the international standard for AI management systems. I can carry out a gap analysis of
+          your current practices against its requirements and help you prepare for a formal assessment.
+        </p>
+        <p>
+          <strong>This is preparation, not certification.</strong> Certification can only be issued by an accredited
+          certification body.
+        </p>
+        <p><strong>Price:</strong> <Todo>price or “on request”</Todo></p>
+      </section>
+
+      <section class="package" aria-labelledby="how">
+        <h2 id="how">How reviews are scored</h2>
+        <p>
+          Reports use the same seven criteria as the published <a href="/notes/">Technical Notes</a>, weighted to suit
+          your product and setting:
+        </p>
+        <ol>
+          {CRITERIA.map((c) => <li>{c.label}</li>)}
+        </ol>
+        <p>
+          To discuss which review fits, email <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>

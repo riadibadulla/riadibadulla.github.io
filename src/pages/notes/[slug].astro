@@ -1,0 +1,81 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render, type CollectionEntry } from 'astro:content';
+import { getNotes } from '../../notes';
+import Base from '../../layouts/Base.astro';
+import ScoreTable from '../../components/ScoreTable.astro';
+import Todo from '../../components/Todo.astro';
+import { formatDate } from '../../site';
+
+export const getStaticPaths = (async () => {
+  const notes = await getNotes();
+  return notes.map((note) => ({ params: { slug: note.id }, props: { note } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const d = note.data;
+const { Content } = await render(note);
+---
+
+<Base title={d.title} description={d.summary} type="article" publishedTime={d.date}>
+  <article class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow"><a href="/notes/">Technical Notes</a></p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.summary}</p>
+    </header>
+
+    <div class="prose">
+      <dl class="facts">
+        <dt>Company</dt>
+        <dd>{d.company}</dd>
+        <dt>Published</dt>
+        <dd><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time></dd>
+        <dt>Reviewed artefacts</dt>
+        <dd>
+          <ul>
+            {d.reviewed_artefacts.map((a) => <li>{a}</li>)}
+          </ul>
+        </dd>
+      </dl>
+
+      {
+        d.pdf && (
+          <p>
+            <a class="btn btn-secondary" href={d.pdf} download>
+              Download the full note (PDF)
+            </a>
+          </p>
+        )
+      }
+
+      <h2>Weighting</h2>
+      <p>{d.weighting}</p>
+    </div>
+
+    <ScoreTable scores={d.scores} overall={d.overall_score} />
+
+    <div class="prose">
+      <div class="callout">
+        <p class="eyebrow">Recommended engagement</p>
+        <p><strong>{d.recommended_engagement}</strong></p>
+        <p class="small"><a href="/services/">What each engagement covers</a></p>
+      </div>
+
+      <div class="section">
+        <Content />
+      </div>
+
+      <hr />
+      <p class="small muted">
+        <Todo>approve disclaimer wording</Todo> This note is based only on artefacts that were publicly available on the
+        date shown. It is an independent technical opinion, not an audit or certification. The company was offered the
+        chance to respond before publication.
+      </p>
+    </div>
+  </article>
+</Base>

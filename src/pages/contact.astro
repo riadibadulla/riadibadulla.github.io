@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT } from '../site';
+---
+
+<Base title="Contact" description="Contact Dr Riad Ibadulla by email or on LinkedIn to discuss a technical review or advisory work.">
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow">Contact</p>
+      <h1>Contact</h1>
+      <p class="lede">
+        To discuss a review, send a short description of your system and what you would like looked at. I will reply to
+        let you know whether and how I can help.
+      </p>
+    </header>
+
+    <dl class="facts prose">
+      <dt>Email</dt>
+      <dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></dd>
+      <dt>LinkedIn</dt>
+      <dd><a href={CONTACT.linkedin}>linkedin.com/in/riadibadulla</a></dd>
+    </dl>
+  </div>
+</Base>

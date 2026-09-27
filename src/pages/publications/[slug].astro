@@ -1,0 +1,63 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Authors from '../../components/Authors.astro';
+
+export const getStaticPaths = (async () => {
+  const pubs = await getCollection('publications');
+  return pubs.map((pub) => ({ params: { slug: pub.id }, props: { pub } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  pub: CollectionEntry<'publications'>;
+}
+
+const { pub } = Astro.props;
+const d = pub.data;
+const { Content } = await render(pub);
+const year = d.date.getUTCFullYear();
+const doiUrl = `https://doi.org/${d.doi}`;
+const ogImage = d.figure ? (await getImage({ src: d.figure, width: 1200, height: 630, fit: 'cover', format: 'jpg' })).src : undefined;
+---
+
+<Base title={d.title} description={d.summary} type="article" publishedTime={d.date} image={ogImage}>
+  <article class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow"><a href="/publications/">Publications</a></p>
+      <h1>{d.title}</h1>
+      <Authors authors={d.authors} />
+      <p class="pub-venue">{d.venue}, {year}</p>
+      <ul class="link-row">
+        <li><a href={doiUrl}>Published version (DOI)</a></li>
+        {d.pdf && <li><a href={d.pdf}>PDF</a></li>}
+        {d.open_access && <li><a href={d.open_access}>{d.open_access_label}</a></li>}
+        {d.bibtex && <li><a href={d.bibtex}>BibTeX</a></li>}
+        {d.code && <li><a href={d.code}>Code on GitHub</a></li>}
+      </ul>
+    </header>
+
+    <div class="prose">
+      <h2>In brief</h2>
+      <p class="lede">{d.summary}</p>
+
+      {
+        d.figure && (
+          <figure class="figure">
+            <Image src={d.figure} alt={d.figure_alt ?? ''} widths={[672, 1008, 1344]} sizes="(min-width: 44rem) 42rem, 100vw" />
+            {d.figure_caption && <figcaption>{d.figure_caption}</figcaption>}
+          </figure>
+        )
+      }
+
+      <h2>{d.body_heading}</h2>
+      <Content />
+
+      <h2>Citation</h2>
+      <p class="citation">
+        {d.authors.join(', ')}. “{d.title}.” <em>{d.venue}</em>, {year}. <a href={doiUrl}>doi:{d.doi}</a>
+      </p>
+    </div>
+  </article>
+</Base>

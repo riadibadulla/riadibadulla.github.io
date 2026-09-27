@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { PROFILES } from '../../site';
+
+const pubs = (await getCollection('publications')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const scholar = PROFILES.find((p) => p.label === 'Google Scholar')!.href;
+---
+
+<Base
+  title="Publications"
+  description="Peer-reviewed publications by Dr Riad Ibadulla on efficient deep learning for optical AI accelerators, adversarial robustness with formal methods, and medical image analysis."
+>
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow">Research</p>
+      <h1>Publications</h1>
+      <p class="lede">
+        Peer-reviewed work on efficient deep learning for optical AI accelerators, provable robustness, and medical
+        image analysis.
+      </p>
+      <p class="small muted">The full, current list is on <a href={scholar}>Google Scholar</a>.</p>
+    </header>
+
+    <ul class="pub-list">
+      {pubs.map((pub) => <li><PublicationCard pub={pub} /></li>)}
+    </ul>
+
+    <section class="section prose" aria-labelledby="thesis">
+      <h2 id="thesis">Doctoral thesis</h2>
+      <p>
+        <strong>High Resolution Capabilities of Free-space Optical Neural Networks.</strong> PhD thesis, City,
+        University of London, 2024. Introduces FatNet, a method for converting conventional neural networks into a form
+        suited to the 4f optical system by trading channels for feature-map resolution, and extends it to segmentation
+        and Vision Transformers.
+      </p>
+      <p><a href="https://openaccess.city.ac.uk/id/eprint/34330/">Read the thesis on City Research Online</a></p>
+    </section>
+
+    <section class="section prose" aria-labelledby="writing">
+      <h2 id="writing">Other writing</h2>
+      <ul class="entry-list">
+        <li>
+          <p class="entry-meta"><time datetime="2023-04-11">11 April 2023</time> · Medium</p>
+          <h3 class="entry-title">
+            <a href="https://medium.com/@riadibadulla/custom-pytorch-layer-fftconv2d-eb1ced4d8fe2">Custom PyTorch layer FFTConv2d</a>
+          </h3>
+          <p>How to write a PyTorch layer that performs 2D convolution in the Fourier domain, without loops, so that it runs efficiently on a GPU.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+</Base>

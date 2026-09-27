@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../site';
+
+interface Props {
+  notes: CollectionEntry<'notes'>[];
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { notes, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+---
+
+{
+  notes.length === 0 ? (
+    <p class="muted">No notes have been published yet.</p>
+  ) : (
+    <ul class="entry-list">
+      {notes.map((note) => (
+        <li>
+          <p class="entry-meta">
+            <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time> · {note.data.company} ·
+            Overall <span class="score-badge">{note.data.overall_score}/10</span>
+          </p>
+          <Heading class="entry-title">
+            <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+          </Heading>
+          <p>{note.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+  )
+}

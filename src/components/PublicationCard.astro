@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Authors from './Authors.astro';
+
+interface Props {
+  pub: CollectionEntry<'publications'>;
+}
+
+const { pub } = Astro.props;
+const d = pub.data;
+const href = `/publications/${pub.id}/`;
+const shortTitle = d.short_title ?? d.title.split(':')[0];
+---
+
+<article class="pub-card">
+  <a class:list={['pub-thumb', { 'is-tile': !d.figure }]} href={href} tabindex="-1" aria-hidden="true">
+    {
+      d.figure ? (
+        <Image src={d.figure} alt="" widths={[480, 720]} sizes="(min-width: 44rem) 15rem, 100vw" />
+      ) : (
+        <span class="pub-tile">
+          <span class="tile-name">{shortTitle}</span>
+          <span class="tile-venue">{d.date.getUTCFullYear()}</span>
+        </span>
+      )
+    }
+  </a>
+  <div>
+    <h2 class="entry-title"><a href={href}>{d.title}</a></h2>
+    <Authors authors={d.authors} />
+    <p class="pub-venue">{d.venue}, {d.date.getUTCFullYear()}</p>
+    <p>{d.summary}</p>
+    <ul class="link-row">
+      <li><a href={href}>Details<span class="visually-hidden"> on {shortTitle}</span></a></li>
+      <li><a href={`https://doi.org/${d.doi}`}>DOI</a></li>
+      {d.pdf && <li><a href={d.pdf}>PDF</a></li>}
+      {d.open_access && <li><a href={d.open_access}>{d.open_access_label}</a></li>}
+      {d.code && <li><a href={d.code}>Code</a></li>}
+    </ul>
+  </div>
+</article>

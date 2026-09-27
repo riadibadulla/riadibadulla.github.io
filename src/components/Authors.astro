@@ -1,0 +1,9 @@
+---
+interface Props {
+  authors: string[];
+}
+
+const { authors } = Astro.props;
+---
+
+<p class="pub-authors">{authors.map((name, i) => <>{name.includes('Ibadulla') ? <strong>{name}</strong> : name}{i < authors.length - 1 && ', '}</>)}</p>

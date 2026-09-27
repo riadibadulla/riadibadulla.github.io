@@ -1,0 +1,41 @@
+---
+import { getNotes } from '../../notes';
+import Base from '../../layouts/Base.astro';
+import NoteList from '../../components/NoteList.astro';
+import { CRITERIA } from '../../criteria';
+
+const notes = await getNotes();
+---
+
+<Base
+  title="Technical Notes"
+  description="Independent technical reviews of AI companies’ public work, scored against seven criteria from architecture to deployment."
+>
+  <div class="wrap page">
+    <header class="page-head">
+      <p class="eyebrow">Technical Notes</p>
+      <h1>Technical Notes</h1>
+      <p class="lede">
+        Short, independent reviews of what AI companies have published: code, models, papers and documentation. Each
+        note scores the work against the same seven criteria and explains every score in a line.
+      </p>
+      <p class="small muted">
+        Subscribe with <a href="/notes/rss.xml">RSS</a>.
+      </p>
+    </header>
+
+    <NoteList notes={notes} />
+
+    <section class="section prose" aria-labelledby="criteria">
+      <h2 id="criteria">The seven criteria</h2>
+      <ol>
+        {CRITERIA.map((c) => <li>{c.label}</li>)}
+      </ol>
+      <p>
+        Each criterion is scored from 0 to 10, or marked “not assessable” when the public material does not allow a
+        fair judgement. The weighting used for the overall score is stated at the top of each note, because what
+        matters most depends on the product and its setting.
+      </p>
+    </section>
+  </div>
+</Base>
